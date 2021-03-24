@@ -1,6 +1,9 @@
+#package
 /node_modules
 
+#build
 /build
 
-/src/test
-/**/*.spec.ts
+# test
+# /src/test
+# /**/*.spec.ts
