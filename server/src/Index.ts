@@ -1,3 +1,13 @@
-export function sum(x: number, y: number): number{
-    return x + y;
+const CoinGecko = require('coingecko-api');
+
+const CoinGeckoClient = new CoinGecko();
+
+let func = async (): Promise<any> => {
+    let data = await CoinGeckoClient.ping();
+
+    return data;
+}
+
+export function ping(): Promise<any>{
+    return func();
 }
