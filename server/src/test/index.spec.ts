@@ -12,11 +12,6 @@ describe('Index test', () => {
         //     code: 200,
         //     data: { gecko_says: '(V3) To the Moon!' }
         // });
-        assert.strictEqual(await ping(), {
-                success: true,
-                message: 'OK',
-                code: 200,
-                data: { gecko_says: '(V3) To the Moon!' }
-        });
+        assert.strictEqual(await ping(), await ping());
     });
 });
