@@ -1,13 +1,12 @@
 #package
 /node_modules
-/**/package-lock.json
 
 #build
 /build
 
 #config
-/src/database/dbconfing
+/src/database/dbconfig.ts
 
 # test
 # /src/test
-# /**/*.spec.ts
+/**/*.spec.ts
