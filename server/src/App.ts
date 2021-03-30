@@ -1,6 +1,7 @@
 import express = require('express');
 import cors from 'cors';
 import path from 'path';
+import * as DBInstance from "./database/DBInstance";
 
 const CoinGecko = require('coingecko-api');
 
@@ -11,7 +12,7 @@ class App{
     public static Bootstrap(): App{
         return new App();
     }
-
+    
     constructor(){
         this.app = express();
         const CoinGeckoClient = new CoinGecko();
@@ -21,14 +22,33 @@ class App{
         this.app.use(express.json());
         this.app.use(express.static(path.join(__dirname, 'public')));
 
-        this.app.get("/", (req: express.Request, res: express.Response) => {
-            res.send("hello");
+        this.app.get("/", async (req: express.Request, res: express.Response) => {
+            const conn = await DBInstance.default.getInstance()
+                .catch((err) => console.log(`db connecting error - ${err}`));
+
+            let dbVersion: string = '';
+
+            if(conn){
+                dbVersion = conn.serverVersion()
+            }
+
+            res.send({
+                serverVersion: dbVersion
+            });
+            
         });
 
-        this.app.get("/Acct", (req: express.Request, res: express.Response) => {
+        this.app.get("/Acct", async (req: express.Request, res: express.Response) => {
+            const conn = await DBInstance.default.getInstance()
+                .catch((err) => console.log(`db connecting error - ${err}`));
+
+            if(conn){
+                
+            }
+
             res.json({
-                "id": "id",
-                "password": "password"
+                id: "id",
+                password: "password"
             });
         });
 
@@ -38,8 +58,8 @@ class App{
             } = req;
             
             res.json({
-                "id": id,
-                "pw": password
+                id: id,
+                pw: password
             });
         });
 

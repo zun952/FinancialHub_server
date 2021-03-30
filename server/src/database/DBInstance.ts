@@ -1,17 +1,36 @@
 import mariadb from 'mariadb';
-const config = require('./dbconfig');
+import connectionData from './dbconfig';
 
-const pool = mariadb.createPool({
-    host: config.host,
-    port: config.port,
-    user: config.user,
-    password: config.user,
-    database: config.database,
-    connectionLimit: 5
-});
+class DBInstance {
+    private static instance: mariadb.PoolConnection;
 
-const dbHelper = (): any => {
+    private constructor(){}
 
+    public static getInstance = async () => {
+        if(!DBInstance.instance){
+            const pool = mariadb.createPool({
+                host: connectionData().host,
+                user: connectionData().user,
+                password: connectionData().password,
+                port: connectionData().port,
+                database: connectionData().database,
+                connectionLimit: 5
+            });
+
+            try{
+                const conn = pool.getConnection();
+
+                if(conn == undefined){
+
+                }
+
+                return conn;
+            } catch(err){
+                throw err;
+            }
+
+        }
+    }
 }
 
-module.exports = dbHelper();
+export default DBInstance;

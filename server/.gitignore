@@ -5,6 +5,9 @@
 #build
 /build
 
+#config
+/src/database/dbconfing
+
 # test
 # /src/test
 # /**/*.spec.ts
