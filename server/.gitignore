@@ -5,7 +5,7 @@
 /build
 
 #config
-/src/database/dbconfig.ts
+# /src/database/dbconfig.ts
 
 # test
 # /src/test
