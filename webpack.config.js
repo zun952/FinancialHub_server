@@ -14,7 +14,7 @@ module.exports = {
   devtool: 'source-map',
   target: 'node',
   resolve: {
-    extensions: ['.tsx, .ts, .js']
+    extensions: ['.ts, .tsx, .js']
   },
   output:{
     filename: 'bundle.js',

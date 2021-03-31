@@ -1,8 +1,8 @@
 {
-  "name": "diary",
+  "name": "financialhub_server",
   "version": "0.0.1",
-  "description": "Express Server for Diary",
-  "main": "index.js",
+  "description": "Express Server for financialhub",
+  "main": "App.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha -- **/*.spec.ts -r ts-node/register --recursive -w",
     "start": "nodemon --watch src --delay 1 --exec ts-node src/www.ts",
@@ -11,18 +11,23 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "extends": [
+    "eslint: recommended"
+  ],
   "devDependencies": {
     "@types/chai": "^4.2.15",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
     "@types/mocha": "^8.2.2",
     "@types/node": "^14.14.35",
+    "@types/redis": "^2.8.28",
     "chai": "^4.3.3",
     "coingecko-api": "^1.0.10",
     "cors": "^2.8.5",
     "mocha": "^8.3.1",
     "nodemon": "^2.0.7",
     "npm-run-all": "^4.1.5",
+    "redis": "^3.0.2",
     "ts-loader": "^8.0.17",
     "typescript": "^4.2.3",
     "webpack": "^5.24.4",
@@ -30,11 +35,14 @@
     "winston": "^3.3.3"
   },
   "dependencies": {
+    "@types/redis": "^2.8.28",
     "assert": "^2.0.0",
     "express": "^4.17.1",
     "mariadb": "^2.5.3",
     "source-map-support": "^0.5.19",
+    "redis": "^3.0.2",
     "ts-node": "^9.1.1",
-    "underscore": "^1.12.0"
+    "underscore": "^1.12.0",
+    "winston": "^3.3.3"
   }
 }

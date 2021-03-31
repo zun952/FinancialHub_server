@@ -1,4 +1,4 @@
-import express = require('express');
+import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import * as DBInstance from "./database/DBInstance";
@@ -6,11 +6,10 @@ import * as DBInstance from "./database/DBInstance";
 const CoinGecko = require('coingecko-api');
 
 class App{
-    public app: express.Application;
+    private app: express.Application;
 
-
-    public static Bootstrap(): App{
-        return new App();
+    public Bootstrap = () =>{
+        return this.app;
     }
     
     constructor(){
@@ -22,15 +21,23 @@ class App{
         this.app.use(express.json());
         this.app.use(express.static(path.join(__dirname, 'public')));
 
+        // 서버 접속 테스트
         this.app.get("/", async (req: express.Request, res: express.Response) => {
+            // DB 접속
             const conn = await DBInstance.default.getInstance()
                 .catch((err) => console.log(`db connecting error - ${err}`));
 
-            let dbVersion: string = '';
-
+            let dbVersion: string = 'disconnected';
+            
             if(conn){
                 dbVersion = conn.serverVersion()
+
+                conn.end();
             }
+
+            // Redis 접속
+
+            
 
             res.send({
                 serverVersion: dbVersion
@@ -38,12 +45,15 @@ class App{
             
         });
 
+        // 
         this.app.get("/Acct", async (req: express.Request, res: express.Response) => {
             const conn = await DBInstance.default.getInstance()
                 .catch((err) => console.log(`db connecting error - ${err}`));
 
             if(conn){
                 
+
+                conn.end();
             }
 
             res.json({
