@@ -1,0 +1,4 @@
+2021-04-01 23:12:09 error: retrieve connection from pool timeout after 10001ms
+2021-04-01 23:12:10 error: retrieve connection from pool timeout after 10001ms
+2021-04-01 23:12:20 error: retrieve connection from pool timeout after 10003ms
+2021-04-01 23:12:45 error: db connecting error - Error: retrieve connection from pool timeout after 10005ms

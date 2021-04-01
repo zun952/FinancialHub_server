@@ -6,7 +6,7 @@
 
 #config
 # /src/database/dbconfig.ts
-.vscode/settings.json
+.vscode
 
 # test
 # /src/test

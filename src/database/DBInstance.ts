@@ -21,16 +21,14 @@ class DBInstance {
                 const conn = pool.getConnection();
 
                 if(conn == undefined){
-
                 }
 
                 return conn;
             } catch(err){
                 throw err;
             }
-
         }
     }
 }
 
-export default DBInstance;
+export { DBInstance };
