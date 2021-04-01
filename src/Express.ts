@@ -2,27 +2,33 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import * as DBInstance from "./database/DBInstance";
+import * as CoinGecko from "./CoinGecko";
 
-const CoinGecko = require('coingecko-api');
+class Express{
+    private static app: express.Application;
 
-class App{
-    private app: express.Application;
+    public static Bootstrap = (): express.Application =>{
+        if(!Express.app){
+            Express.SetApi();
+        }
 
-    public Bootstrap = () =>{
-        return this.app;
+        return Express.app;
     }
     
     constructor(){
-        this.app = express();
-        const CoinGeckoClient = new CoinGecko();
+        Express.SetApi();
+    }
 
-        this.app.use(cors());
-        this.app.use(express.urlencoded({extended: false}));
-        this.app.use(express.json());
-        this.app.use(express.static(path.join(__dirname, 'public')));
+    private static SetApi = (): void => {
+        Express.app = express();
+
+        Express.app.use(cors());
+        Express.app.use(express.urlencoded({extended: false}));
+        Express.app.use(express.json());
+        Express.app.use(express.static(path.join(__dirname, 'public')));
 
         // 서버 접속 테스트
-        this.app.get("/", async (req: express.Request, res: express.Response) => {
+        Express.app.get("/", async (req: express.Request, res: express.Response) => {
             // DB 접속
             const conn = await DBInstance.default.getInstance()
                 .catch((err) => console.log(`db connecting error - ${err}`));
@@ -46,7 +52,7 @@ class App{
         });
 
         // 
-        this.app.get("/Acct", async (req: express.Request, res: express.Response) => {
+        Express.app.get("/Acct", async (req: express.Request, res: express.Response) => {
             const conn = await DBInstance.default.getInstance()
                 .catch((err) => console.log(`db connecting error - ${err}`));
 
@@ -62,7 +68,8 @@ class App{
             });
         });
 
-        this.app.post("/Acct", (req: express.Request, res: express.Response) => {
+        //
+        Express.app.post("/Acct", (req: express.Request, res: express.Response) => {
             const{
                 body: { id, password }
             } = req;
@@ -73,21 +80,19 @@ class App{
             });
         });
 
-        this.app.get("/AllCoin", async (req: express.Request, res: express.Response) => {
-            let data = await Get();
+        //
+        Express.app.get("/AllCoin", async (req: express.Request, res: express.Response) => {
+            let data = await CoinGecko.default.markets();
+
+            const currentTime = new Date().toLocaleString();
+
+            console.log(`[${currentTime}] ${req.method} ${req.ip}${req.url}`);
 
             res.json({
                 "data": data
             })
         });
-
-        let Get = async(): Promise<any> => {
-            
-            return await CoinGeckoClient.coins.markets({
-                vs_currency: 'krw'
-            });
-        }
     }
 }
 
-export default App;
+export default Express;
