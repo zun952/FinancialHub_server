@@ -10,3 +10,4 @@
 # test
 # /src/test
 /**/*.spec.ts
+.vscode/settings.json
