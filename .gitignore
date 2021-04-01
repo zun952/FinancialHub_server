@@ -8,6 +8,10 @@
 # /src/database/dbconfig.ts
 .vscode
 
+#log
+/logs
+
+
 # test
 # /src/test
 /**/*.spec.ts
