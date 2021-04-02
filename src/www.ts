@@ -1,6 +1,6 @@
-const logger = require("./winston");
 // import express from './Express';
-const express = require('./Express')
+const express = require('./Express');
+const logger = require("./winston");
 
 const port: number = Number(process.env.PORT) || 3000;
 const app = express.default.bootstrap();

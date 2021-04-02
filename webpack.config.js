@@ -3,6 +3,10 @@ const { NODE_ENV = 'production' } = process.env;
 
 module.exports = {
   entry: './src/www.ts',
+  output:{
+    filename: 'bundle.webpack.js',
+    path: path.resolve(__dirname, 'dist')
+  },
   module: {
     rules: [
       {
@@ -17,9 +21,5 @@ module.exports = {
   target: 'node',
   resolve: {
     extensions: ['.ts, .tsx, .js']
-  },
-  output:{
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
   }
 };

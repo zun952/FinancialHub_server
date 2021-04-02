@@ -2,7 +2,7 @@
   "name": "financialhub_server",
   "version": "0.0.1",
   "description": "Express Server for financialhub",
-  "main": "App.ts",
+  "main": "Express.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha -- **/*.spec.ts -r ts-node/register --recursive -w",
     "start": "nodemon --watch src --delay 1 --exec ts-node src/www.ts",
