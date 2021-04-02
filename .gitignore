@@ -3,6 +3,7 @@
 
 #build
 /build
+/dist
 
 #config
 # /src/database/dbconfig.ts

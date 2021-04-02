@@ -93,9 +93,11 @@ class Express{
         Express.app.get("/AllCoin", async (req: express.Request, res: express.Response) => {
             let data = await coinGecko.default.markets();
 
-            const currentTime = new Date().toLocaleString();
-
-            logger.info(`[${currentTime}] ${req.method} ${req.ip}${req.url}`);
+            if(data["success"] == false){
+                logger.warn(`${req.method} ${req.ip}${req.url} - fail`);
+            } else{
+                logger.info(`${req.method} ${req.ip}${req.url} - success`);
+            }
 
             res.json({
                 data: data
