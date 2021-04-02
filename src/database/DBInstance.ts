@@ -31,4 +31,4 @@ class DBInstance {
     }
 }
 
-export { DBInstance };
+export default DBInstance ;

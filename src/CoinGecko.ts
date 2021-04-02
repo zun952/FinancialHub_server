@@ -1,9 +1,9 @@
-const CoinGecko = require('coingecko-api');
+const coinGecko = require('coingecko-api');
 
-const CoinGeckoClient = new CoinGecko();
+const coinGeckoClient = new coinGecko();
 
 let markets = async(): Promise<any> => {
-    return await CoinGeckoClient.coins.markets({
+    return await coinGeckoClient.coins.markets({
         vs_currency: 'krw'
     });
 }

@@ -1,9 +1,8 @@
 import 'source-map-support/register';
-import Express from './Express';
+import express from './Express';
 
 const port: number = Number(process.env.PORT) || 3000;
-// const app: express.Application = new App().app;
-const app = Express.Bootstrap();
+const app = express.bootstrap();
 
 app.listen(port, () => console.log(`Express server listening at ${port}`))
     .on('error', (err) => console.error(err));

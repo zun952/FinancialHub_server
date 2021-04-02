@@ -1,9 +1,9 @@
-const CoinGecko = require('coingecko-api');
+const coinGecko = require('coingecko-api');
 
-const CoinGeckoClient = new CoinGecko();
+const coinGeckoClient = new coinGecko();
 
 const func = async (): Promise<any> => {
-    let data = await CoinGeckoClient.ping();
+    let data = await coinGeckoClient.ping();
 
     return data;
 }

@@ -1,27 +1,26 @@
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
-import { DBInstance } from "./database/DBInstance";
-import * as CoinGecko from "./CoinGecko";
-import { logger } from "./winston";
-import { PoolConnection } from 'mariadb';
+import dbInstance from "./database/DbInstance";
+import * as coinGecko from "./coinGecko";
+import logger from "./winston";
 
 class Express{
     private static app: express.Application;
 
-    public static Bootstrap = (): express.Application =>{
+    public static bootstrap = (): express.Application =>{
         if(!Express.app){
-            Express.SetApi();
+            Express.setApi();
         }
 
         return Express.app;
     }
     
     constructor(){
-        Express.SetApi();
+        Express.setApi();
     }
 
-    private static SetApi = (): void => {
+    private static setApi = (): void => {
         Express.app = express();
 
         Express.app.use(cors());
@@ -35,7 +34,7 @@ class Express{
 
             // DB 접속
             try{
-                const conn = await DBInstance.getInstance();
+                const conn = await dbInstance.getInstance();
 
                 if(conn){
                     dbVersion = conn.serverVersion();
@@ -58,7 +57,7 @@ class Express{
             let resData;
 
             try {
-                const conn = await DBInstance.getInstance();
+                const conn = await dbInstance.getInstance();
 
                 if(conn){
                     conn.end();
@@ -92,7 +91,7 @@ class Express{
 
         //
         Express.app.get("/AllCoin", async (req: express.Request, res: express.Response) => {
-            let data = await CoinGecko.default.markets();
+            let data = await coinGecko.default.markets();
 
             const currentTime = new Date().toLocaleString();
 
