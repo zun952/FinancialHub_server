@@ -20,6 +20,7 @@ class Express{
         Express.setApi();
     }
 
+    // express setting
     private static setApi = (): void => {
         Express.app = express();
 
@@ -53,7 +54,7 @@ class Express{
         });
 
         // 
-        Express.app.get("/Acct", async (req: express.Request, res: express.Response) => {
+        Express.app.get("/Account/:id", async (req: express.Request, res: express.Response) => {
             let resData;
 
             try {
@@ -64,7 +65,7 @@ class Express{
                 }
 
                 resData = {
-                    id: 'id'
+                    id: req.params['id']
                 };
             } catch (err) {
                 logger.error(`db connecting error - ${err}`);
@@ -78,7 +79,7 @@ class Express{
         });
 
         //
-        Express.app.post("/Acct", (req: express.Request, res: express.Response) => {
+        Express.app.post("/Account", (req: express.Request, res: express.Response) => {
             const{
                 body: { id, password }
             } = req;
@@ -89,9 +90,24 @@ class Express{
             });
         });
 
+        Express.app.get("/coins/:id", async (req: express.Request, res: express.Response) => {
+            const coinId = req.params.id;
+            const data = await coinGecko.default.getCurrentCoin(coinId);
+
+            if(data["success"] == false){
+                logger.warn(`${req.method} ${req.ip}${req.url} - fail`);
+            } else{
+                logger.info(`${req.method} ${req.ip}${req.url} - success`);
+            }
+
+            res.json({
+                data: data
+            })
+        });
+
         //
-        Express.app.get("/AllCoin", async (req: express.Request, res: express.Response) => {
-            let data = await coinGecko.default.markets();
+        Express.app.get("/coins", async (req: express.Request, res: express.Response) => {
+            const data = await coinGecko.default.markets();
 
             if(data["success"] == false){
                 logger.warn(`${req.method} ${req.ip}${req.url} - fail`);
