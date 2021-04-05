@@ -1,13 +1,13 @@
 import mariadb from 'mariadb';
 import connectionData from './dbconfig';
 
-class DBInstance {
+class DbInstance {
     private static instance: mariadb.PoolConnection;
 
     private constructor(){}
 
     public static getInstance = async () => {
-        if(!DBInstance.instance){
+        if(!DbInstance.instance){
             const pool = mariadb.createPool({
                 host: connectionData().host,
                 user: connectionData().user,
@@ -31,4 +31,4 @@ class DBInstance {
     }
 }
 
-export default DBInstance ;
+export default DbInstance;
