@@ -33,6 +33,15 @@ export default ({ app }: { app: express.Application }) => {
     // load API routes
     app.use(config.api.prefix, routes);
 
+    console.log(app._router.stack.filter((r: { route: any; })  => r.route)
+                .map((r: { route: { methods: {}; path: any; }; }) => {
+                    return {
+                        method: Object.keys(r.route.methods)[0].toUpperCase(),
+                        path: r.route.path
+                    };
+                })
+    );
+    
     // DB 접속 테스트
     // app.get("/dbs", async (req: express.Request, res: express.Response) => {
     //     let dbVersion: string = 'disconnected';

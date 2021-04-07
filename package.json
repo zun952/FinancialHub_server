@@ -2,15 +2,16 @@
   "name": "financialhub_server",
   "version": "0.0.1",
   "description": "Express Server for financialhub",
-  "main": "Express.ts",
+  "main": "www.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha -- **/*.spec.ts -r ts-node/register --recursive -w",
     "start": "nodemon --watch src --delay 1 --exec ts-node src/www.ts",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "extends": [
     "eslint: recommended"
   ],
