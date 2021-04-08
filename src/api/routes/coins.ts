@@ -9,16 +9,16 @@ export default (app: Router) => {
 
     // 전체 코인 정보
     route.get("/", async (req: Request, res: Response) => {
-        const data = await coinGecko.default.markets();
+        let data: unknown;
 
-        // if(data["success"] == false){
-        //     logger.warn(`${req.method} ${req.ip}${req.url} - fail`);
-        // } else{
-        //     logger.info(`${req.method} ${req.ip}${req.url} - success`);
-        // }
+        try{
+            data = await coinGecko.default.markets();
+        } catch(err: any){
+            logger.error(err);
+        }
 
         res.json({
-            data: data
+            data
         }).status(200);
     });
 

@@ -6,14 +6,16 @@ const coinGeckoClient = new coinGecko();
 const markets = async(): Promise<any> => {
     return await coinGeckoClient.coins.markets({ vs_currency: 'krw' })
         .then((result: any) => {
+            logger.info(`get All data from CoinGecko API`);
+
             return result;
         }).catch((err: any) => {
-            return err;
+            throw err;
         });
 }
 
 const getCurrentCoin = async(id: string): Promise<any> => {
-    return await coinGeckoClient.coins.fetch(id , {
+    return await coinGeckoClient.coins.fetch(id, {
         tickers: false,
         community_data: false,
         developer_data: false,
@@ -21,9 +23,11 @@ const getCurrentCoin = async(id: string): Promise<any> => {
         sparkline: false
     })
         .then((result: any) => {
+            logger.info(`get ${id} data from CoinGecko API`);
+
             return result;
         }).catch((err: any) => {
-            return err;
+            throw err;
         });
 }
 
