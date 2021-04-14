@@ -2,17 +2,18 @@ import cors from 'cors';
 import path from 'path';
 import express, { NextFunction, Request, Response } from 'express';
 import { HttpError } from "http-errors";
-import logger from "../winston";
+import morgan from "morgan";
+import { logger, stream } from "../winston";
 import routes from "../api";
 import config from "../config";
 
 export default ({ app }: { app: express.Application }) => {
-    app.get('/status', (req: express.Request, res: Response) => { res.status(200).end(); });
-    app.head('/status', (req: express.Request, res: Response) => { res.status(200).end(); });
+    morgan.format('logFormat', ':remote-addr :method :url status: :status length: res[content-length] res-time: :response-time ms');
+    app.use(morgan('logFormat', { stream }))
 
     // Useful if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
     // It shows the real origin IP in the heroku or Cloudwatch logs
-    // app.enable('trust proxy');
+    app.enable('trust proxy');
 
     // The magic package that prevents frontend developers going nuts
     // Alternated description: 
@@ -23,12 +24,8 @@ export default ({ app }: { app: express.Application }) => {
     app.use(express.json());
     app.use(express.static(path.join(__dirname, 'public')));
 
-    // 접속 로그용
-    app.use((req: Request, res: Response, next: NextFunction) => {
-        logger.info(`${req.method} ${req.ip}${req.url}`);
-
-        next();
-    });
+    app.get('/status', (req: express.Request, res: Response) => { res.status(200).end(); });
+    app.head('/status', (req: express.Request, res: Response) => { res.status(200).end(); });
 
     // load API routes
     app.use(config.api.prefix, routes);

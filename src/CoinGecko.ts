@@ -1,4 +1,4 @@
-import logger from './winston';
+import { logger } from './winston';
 const coinGecko = require('coingecko-api');
 
 const coinGeckoClient = new coinGecko();

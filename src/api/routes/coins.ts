@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import * as coinGecko from "../../coinGecko";
-import logger from "../../winston";
+import { logger } from "../../winston";
 
 const route = Router();
 

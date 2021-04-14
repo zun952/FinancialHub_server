@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import DbInstance from "../../database/DbInstance";
-import logger from "../../winston";
+import { logger } from "../../winston";
 
 const route = Router();
 
