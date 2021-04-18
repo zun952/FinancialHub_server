@@ -1,11 +1,12 @@
 import express from 'express';
 import { logger } from '../winston';
+import loader from "../loaders";
 
 async function startServer() {
     const port: number = Number(process.env.PORT) || 3000;
     const app: express.Application = express();
 
-    await require('../loaders').default({ expressApp: app });
+    await loader({ expressApp: app });
     
     try{
         app.listen(port, () => logger.info(`Express server listening at ${port}`))

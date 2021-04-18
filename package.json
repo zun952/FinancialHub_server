@@ -2,10 +2,10 @@
   "name": "financialhub_server",
   "version": "0.0.1",
   "description": "Express Server for financialhub",
-  "main": "/bin/www.ts",
+  "main": "src/bin/www.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha -- **/*.spec.ts -r ts-node/register --recursive -w",
-    "start": "nodemon --watch src --delay 1 --exec ts-node src/bin/www.ts",
+    "start": "nodemon --watch src --delay 1 --exec ts-node src/bin/www",
     "build": "webpack --config webpack.config.ts"
   },
   "keywords": [],

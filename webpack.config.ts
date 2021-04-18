@@ -2,7 +2,7 @@ const path = require('path');
 const { NODE_ENV = 'production' } = process.env;
 
 module.exports = {
-  entry: './src/www.ts',
+  entry: './src/bin/www.ts',
   output: {
     filename: 'bundle.webpack.js',
     path: path.resolve(__dirname, 'dist')
@@ -19,7 +19,9 @@ module.exports = {
         include: [
           path.join(__dirname)
         ],
-        exclude: /node_modules/
+        exclude: [
+          /node_modules/
+        ]
       }
     ]
   },
