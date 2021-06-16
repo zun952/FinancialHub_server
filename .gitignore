@@ -1,17 +1,19 @@
 #package
-/node_modules
+node_modules
 
 #build
-/build
-/dist
+build
+dist
 
 #config
 # /src/database/dbconfig.ts
 .vscode
 
 #log
-/logs
+logs
 
+#mac
+.DS_Store
 
 # test
 # /src/test
