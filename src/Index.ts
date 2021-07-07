@@ -35,4 +35,3 @@ const result = a.map(async (row) => {
 
     console.log(result);
 });
-

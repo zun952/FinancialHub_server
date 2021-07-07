@@ -31,38 +31,13 @@ export default ({ app }: { app: express.Application }) => {
     app.use(config.api.prefix, routes);
 
     console.log(app._router.stack.filter((r: { route: any; })  => r.route)
-                .map((r: { route: { methods: {}; path: any; }; }) => {
-                    return {
-                        method: Object.keys(r.route.methods)[0].toUpperCase(),
-                        path: r.route.path
-                    };
-                })
-    );
+        .map((r: { route: { methods: {}; path: any; }; }) => {
+        return {
+            method: Object.keys(r.route.methods)[0].toUpperCase(),
+            path: r.route.path
+        };
+    }));
     
-    // DB 접속 테스트
-    // app.get("/dbs", async (req: express.Request, res: express.Response) => {
-    //     let dbVersion: string = 'disconnected';
-
-    //     // DB 접속
-    //     try{
-    //         const conn = await dbInstance.getInstance();
-
-    //         if(conn){
-    //             dbVersion = conn.serverVersion();
-    //             conn.end();
-    //         }
-    //     } catch(err){
-    //         logger.error(err);
-    //     }
-
-    //     // Redis 접속
-        
-    //     res.send({
-    //         serverVersion: dbVersion,
-    //         redis: null
-    //     });
-    // });
-
     app.use((req: Request, res: Response, next: NextFunction) => {
         const err = new Error('Not Found') as any;
 
