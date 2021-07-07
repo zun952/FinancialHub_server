@@ -21,7 +21,9 @@ module.exports = {
         include: [
           path.join(__dirname)
         ],
-        exclude: /node_modules/
+        exclude: [
+          /node_modules/
+        ]
       }
     ]
   },
