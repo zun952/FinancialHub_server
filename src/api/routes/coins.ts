@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import * as coinGecko from "../../coinGecko";
+import * as coinGecko from "../../coinGecko"
 import { logger } from "../../winston";
 
 const route = Router();
@@ -26,7 +26,7 @@ export default (app: Router) => {
     route.get("/:id", async (req: Request, res: Response) => {
         const coinId = req.params.id;
         const data = await coinGecko.default.getCurrentCoin(coinId);
-
+        
         // if(data["success"] == false){
         //     logger.warn(`${req.method} ${req.ip}${req.url} - fail`);
         // } else{

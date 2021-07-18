@@ -1,10 +1,13 @@
 import { logger } from './winston';
-const coinGecko = require('coingecko-api');
+import { CoinGeckoClient } from 'coingecko-api-v3';
 
-const coinGeckoClient = new coinGecko();
+const client = new CoinGeckoClient({
+    timeout: 10000,
+    autoRetry: true,
+});
 
 const markets = async(): Promise<any> => {
-    return await coinGeckoClient.coins.markets({ vs_currency: 'krw' })
+    return await client.coinMarket({ vs_currency: 'krw', ids: 'btc' })
         .then((result: any) => {
             logger.info(`get All data from CoinGecko API`);
 
@@ -15,15 +18,9 @@ const markets = async(): Promise<any> => {
 }
 
 const getCurrentCoin = async(id: string): Promise<any> => {
-    return await coinGeckoClient.coins.fetch(id, {
-        tickers: false,
-        community_data: false,
-        developer_data: false,
-        localization: false,
-        sparkline: false
-    })
+    return await client.coinIdTickers({ id: id })
         .then((result: any) => {
-            logger.info(`get ${id} data from CoinGecko API`);
+            logger.info(`get '${id}' data from CoinGecko API`);
 
             return result;
         }).catch((err: any) => {
