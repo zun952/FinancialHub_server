@@ -6,12 +6,12 @@ const { NODE_ENV = 'production' } = process.env;
 module.exports = {
   entry: './src/bin/www.ts',
   output: {
-    filename: 'bundle.webpack.js',
+    filename: 'bundle.webpack.ts',
     path: path.resolve(__dirname, 'dist')
   },
   target: 'node',
   resolve: {
-    extensions: ['.ts, .js'],
+    extensions: ['.js, .ts'],
   },
   module: {
     rules: [

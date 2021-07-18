@@ -1,6 +1,5 @@
 import express from 'express';
 import { logger } from '../winston';
-import loader from "../loaders";
 
 async function startServer() {
     const port: number = Number(process.env.PORT) || 3000;

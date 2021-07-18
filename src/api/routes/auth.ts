@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from "express";
-import DbInstance from "../../database/DbInstance";
+import DbInstance from "../../database/DBInstance";
 import { logger } from "../../winston";
 
 const route = Router();
@@ -25,7 +25,7 @@ export default (app: Router) => {
             logger.error(`db connecting error - ${err}`);
 
             resData = {
-                err: err.message
+                err: (err as Error).message
             }
         }
 

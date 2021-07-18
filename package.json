@@ -5,13 +5,14 @@
   "main": "src/bin/www.ts",
   "scripts": {
     "test": "node_modules/.bin/mocha -- **/*.spec.ts -r ts-node/register --recursive -w",
-    "start": "nodemon --watch src --delay 1 --exec node build/www",
+    "___start": "nodemon --watch src --delay 1 --exec node build/www",
+    "start": "npx tsc && node build/bin/www",
     "build": "webpack --stats-error-details --config webpack.config.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
+  "type": "commonjs",
   "extends": [
     "eslint: recommended"
   ],
@@ -37,7 +38,7 @@
     "redis": "^3.0.2",
     "ts-loader": "^8.0.17",
     "tsc": "^2.0.3",
-    "typescript": "^4.2.3",
+    "typescript": "^4.3.5",
     "webpack": "^5.24.4",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2",
